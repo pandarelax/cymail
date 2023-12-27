@@ -12,6 +12,6 @@
         "declaration": true, // Generate declaration files
         "sourceMap": true // Generate source maps for debugging
     },
-    "include": ["src"], // Specify the directories to include for compilation
+    "include": ["src/**/*"], // Specify the directories to include for compilation
     "exclude": ["node_modules", "dist"] // Specify the directories to exclude from compilation
 }
