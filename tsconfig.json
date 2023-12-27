@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es2020", // Set the target ECMAScript version
+        "module": "NodeNext", // Use CommonJS module system
+        "moduleResolution": "NodeNext", // Use Node.js-style module resolution
+        "lib": ["es2020"], // Include necessary TypeScript library files
+        "outDir": "dist", // Output directory for compiled files
+        "rootDir": "src", // Root directory for source files
+        "strict": true, // Enable strict type checking
+        "esModuleInterop": true, // Enable interoperability between CommonJS and ES modules
+        "resolveJsonModule": true, // Enable importing JSON files
+        "declaration": true, // Generate declaration files
+        "sourceMap": true // Generate source maps for debugging
+    },
+    "include": ["src"], // Specify the directories to include for compilation
+    "exclude": ["node_modules", "dist"] // Specify the directories to exclude from compilation
+}
