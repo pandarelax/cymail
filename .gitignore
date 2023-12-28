@@ -26,3 +26,6 @@ yarn.lock
 .DS_Store
 Thumbs.db
 *.swp
+
+# Ignore http test files
+*.http
