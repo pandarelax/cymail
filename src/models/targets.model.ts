@@ -1,5 +1,5 @@
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import Campaign from "./campaigns.model.js";
+import { Campaign } from "./campaigns.model.js";
 
 @Table({
     tableName: "target",

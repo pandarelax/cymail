@@ -1,5 +1,5 @@
 import { AutoIncrement, BelongsToMany, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
-import Target from "./targets.model.js";
+import { Target } from "./targets.model.js";
 
 @Table({
     tableName: "campaign",
