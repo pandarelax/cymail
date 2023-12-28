@@ -1,21 +1,32 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { AutoIncrement, BelongsToMany, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
+import Target from "./targets.model.js";
 
-const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/sequelize-typescript');
+@Table({
+    tableName: "campaign",
+    timestamps: true,
+    modelName: "Campaign"
+})
+export class Campaign extends Model {
+    @Column({
+        primaryKey: true,
+        type: DataType.UUID,
+        defaultValue: DataType.UUIDV4
+    })
+    declare id: string;
 
-class Campaigns extends Model {}
+    @Column({
+        allowNull: false,
+        type: DataType.STRING
+    })
+    declare name: string;
 
-Campaigns.init({
-    // attributes
-    Name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Description: {
-        type: DataTypes.STRING
-        // allowNull defaults to true
-    }
-}, {
-    sequelize,
-    modelName: 'Campaigns'
-    // options
-});
+    @Column({
+        allowNull: false,
+        type: DataType.STRING
+    })
+    declare description: string;
+
+    // Many to many relationship with target
+    @BelongsToMany((): typeof Target => Target, { through: "campaign_target" })
+    declare targets: Target[];
+}
