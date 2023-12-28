@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 export class HealthcheckController {
-    public static async live(req: Request, res: Response): Promise<void> {
+    public async live(req: Request, res: Response): Promise<void> {
         try {
             // Perform any necessary healthcheck logic here
 
@@ -11,7 +11,7 @@ export class HealthcheckController {
         }
     }
 
-    public static async ready(req: Request, res: Response): Promise<void> {
+    public async ready(req: Request, res: Response): Promise<void> {
         try {
             // Perform any necessary healthcheck logic here
 
