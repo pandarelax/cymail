@@ -16,7 +16,7 @@ const app = express();
 const __dirname = path.resolve();
 
 // Middleware
-app.use(helmet());
+app.use(helmet())
 app.use(
   cors({
     origin: true,
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
+// Route to indexRouter
 app.use('/', indexRouter);
 
 // Start the server
