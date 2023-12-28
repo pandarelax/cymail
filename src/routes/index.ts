@@ -5,8 +5,8 @@ import targetsRouter from './targets.router.js';
 
 const router = express.Router();
 
-router.use('/campaigns', campaignsRouter);
-router.use('/healthcheck', healthCheckRouter);
-router.use('/targets', targetsRouter);
+router.use("/campaigns", campaignsRouter);
+router.use("/healthcheck", healthCheckRouter);
+router.use("/targets", targetsRouter);
 
 export default router;

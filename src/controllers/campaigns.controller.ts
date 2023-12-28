@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 export class CampaignsController {
     // GET /campaigns
     public static async get(req: Request, res: Response) {
+        res.send('Hello Campaigns!');
     }
 
     // GET /campaigns/:id

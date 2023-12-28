@@ -7,6 +7,7 @@ import compression from 'compression';
 import logger from 'morgan';
 import helmet from 'helmet';
 import path from 'path';
+import indexRouter from './routes/index.js';
 
 
 // Create an instance of Express
@@ -29,9 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-});
+app.use('/', indexRouter);
 
 // Start the server
 const port: string | 3000 = process.env.PORT || 3000;
