@@ -8,6 +8,7 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import path from 'path';
 import indexRouter from './routes/index.js';
+import "./db/connection.js";
 
 
 // Create an instance of Express
