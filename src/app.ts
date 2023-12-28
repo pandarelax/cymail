@@ -8,8 +8,10 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import path from 'path';
 
+
 // Create an instance of Express
 const app = express();
+const __dirname = path.resolve();
 
 // Middleware
 app.use(helmet());
@@ -33,3 +35,6 @@ app.get('/', (req, res) => {
 
 // Start the server
 const port: string | 3000 = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}/`);
+});

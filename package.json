@@ -2,9 +2,11 @@
   "name": "core",
   "version": "1.0.0",
   "description": "core application to handle routes for phishy task case",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/app.ts"
   },
   "author": "pandarelax",
   "license": "ISC",
