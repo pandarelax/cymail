@@ -1,9 +1,18 @@
 import { Request, Response } from 'express';
 import { Campaign } from '../models/campaigns.model.js';
 import sequelize from '../db/connection.js';
+import { CampaignsService } from '../services/campaigns.service.js';
+import { TargetEmail } from "../types.js";
+import { Target } from '../models/targets.model.js';
 // import { Campaign } from '../models/Campaign';
 
 export class CampaignsController {
+    private campaignsService: CampaignsService;
+
+    constructor() {
+        this.campaignsService = new CampaignsService();
+    }
+    
     // GET /campaigns
     public async get(req: Request, res: Response) {
         try {
@@ -91,8 +100,41 @@ export class CampaignsController {
         }
     }
 
-    // POST /campaigns/launch
+    /**
+     * Launches the simulation of a campaign and adds the target emails to the queue
+     * @param req Request
+     * @param res Response
+     * @returns Promise<Response>
+     */
     public async launch(req: Request, res: Response) {
+        try {
+            const campaign = await Campaign.findByPk(req.params.id);
+
+            if (!campaign) {
+                return res.status(404).json({ error: 'Campaign not found' });
+            }
+
+            const targets = await campaign.$get('targets');
+
+            if (!targets) {
+                return res.status(404).json({ error: 'Targets not found' });
+            }
+
+            const targetMails: TargetEmail[] = targets.map(
+              (target: Target) => ({
+                from: campaign.id,
+                to: target.email,
+                subject: campaign.description,
+              })
+            );
+
+            // Add target emails to queue
+            await this.campaignsService.addTargetEmailsToQueue(targetMails);
+
+            return res.status(200).json({ message: 'Campaign launched successfully' });
+        } catch (error) {
+            return res.status(500).json({ error: 'Internal server error' });
+        }
     }
 
     // POST /campaigns/schedule
