@@ -122,9 +122,9 @@ export class CampaignsController {
 
             const targetMails: TargetEmail[] = targets.map(
               (target: Target) => ({
-                from: campaign.id,
+                from: "efehanturhan@gmail.com",
                 to: target.email,
-                subject: campaign.description,
+                subject: `Simulation Test: ${target.fullName}`,
               })
             );
 
@@ -133,7 +133,7 @@ export class CampaignsController {
 
             return res.status(200).json({ message: 'Campaign launched successfully' });
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' });
+            return res.status(500).json({ error: error });
         }
     }
 
