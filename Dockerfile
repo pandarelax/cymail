@@ -1,8 +1,8 @@
 # Use a lightweight Node.js base image
-FROM node:14-alpine
+FROM node:20-alpine
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -11,10 +11,10 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 # Copy the rest of the application code to the working directory
-COPY . .
+COPY --chown=node:node . /usr/src/app
 
 # Expose the port on which your application will run
 EXPOSE 3000
 
 # Start the application
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
