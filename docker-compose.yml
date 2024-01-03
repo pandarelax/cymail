@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  core:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - ./phishy/core:/app
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - phishy-network
+
+  worker:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - ./phishy/worker:/app
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3001:3001"
+    depends_on:
+      - redis
+    networks:
+      - phishy-network
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=phishy_db
+      - POSTGRES_USER=phishy_user
+      - POSTGRES_PASSWORD=phishy_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - phishy-network
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    networks:
+      - phishy-network
+
+networks:
+  phishy-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
