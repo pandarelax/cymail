@@ -80,7 +80,12 @@ export class CampaignsController {
         }
     }
 
-    // DELETE /campaigns/:id
+    /**
+     * Deletes a campaign and its targets
+     * @param req Request
+     * @param res Response
+     * @returns Promise<Response>
+     */
     public async delete(req: Request, res: Response) {
        try {
          const campaignToDelete = await Campaign.findByPk(req.params.id);
