@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/app.ts"
+    "dev": "node --watch --no-warnings=ExperimentalWarning --loader ts-node/esm src/app.ts",
+    "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/app.ts"
   },
   "author": "pandarelax",
   "license": "ISC",

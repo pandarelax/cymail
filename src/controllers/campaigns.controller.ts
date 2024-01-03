@@ -4,14 +4,14 @@ import sequelize from '../db/connection.js';
 import { CampaignsService } from '../services/campaigns.service.js';
 import { TargetEmail } from "../types.js";
 import { Target } from '../models/targets.model.js';
+import { Transaction } from 'sequelize';
 // import { Campaign } from '../models/Campaign';
 
 export class CampaignsController {
-    private campaignsService: CampaignsService;
 
-    constructor() {
-        this.campaignsService = new CampaignsService();
-    }
+    constructor(
+        private campaignsService: CampaignsService
+    ) {}
     
     // GET /campaigns
     public async get(req: Request, res: Response) {
@@ -47,7 +47,7 @@ export class CampaignsController {
     // POST /campaigns
     public async create(req: Request, res: Response) {
         try {
-            const result = await sequelize.transaction(async (t) => {
+            const result = await sequelize.transaction(async (t: Transaction) => {
                 const campaign = await Campaign.create(req.body, { transaction: t });
 
                 return campaign;
@@ -68,7 +68,7 @@ export class CampaignsController {
                 return res.status(404).json({ error: 'Campaign not found' });
             }
 
-            const result = await sequelize.transaction(async (t) => {
+            const result = await sequelize.transaction(async (t: Transaction) => {
                 const campaign = await campaignToUpdate.update(req.body, { transaction: t });
 
                 return campaign;
@@ -89,8 +89,8 @@ export class CampaignsController {
             return res.status(404).json({ error: 'Campaign not found' });
         }
 
-        await sequelize.transaction(async (t) => {
-            await campaignToDelete.destroy({ transaction: t });
+        await sequelize.transaction(async (t: Transaction) => {
+          await campaignToDelete.destroy({ transaction: t });
         });
 
         return res.status(204).json({ message: 'Campaign deleted successfully'});

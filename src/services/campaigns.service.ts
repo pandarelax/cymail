@@ -2,9 +2,10 @@ import { Queue } from "bullmq";
 import { TargetEmail } from "../types.js";
 
 export class CampaignsService {
-  private queue: Queue;
 
-  constructor() {
+  constructor(
+    private queue: Queue
+  ) {
     this.queue = new Queue("email-queue", {
       connection: {
         host: process.env.REDIS_HOST || "localhost",

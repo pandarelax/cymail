@@ -14,6 +14,7 @@ import "./db/connection.js";
 // Create an instance of Express
 const app = express();
 const __dirname = path.resolve();
+const port: string | 3000 = process.env.PORT || 3000;
 
 // Middleware
 app.use(helmet())
@@ -34,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 // Start the server
-const port: string | 3000 = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/`);
 });
