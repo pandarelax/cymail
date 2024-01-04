@@ -2,39 +2,27 @@ version: '3'
 
 services:
   core:
-    image: node:latest
-    working_dir: /app
-    volumes:
-      - ./phishy/core:/app
-    environment:
-      - NODE_ENV=production
+    build:
+      context: ./core
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./core:/usr/src/app
+    tty: true
+    restart: always
     depends_on:
       - postgres
-    networks:
-      - phishy-network
-
-  worker:
-    image: node:latest
-    working_dir: /app
-    volumes:
-      - ./phishy/worker:/app
-    environment:
-      - NODE_ENV=production
-    ports:
-      - "3001:3001"
-    depends_on:
       - redis
-    networks:
-      - phishy-network
 
   postgres:
     image: postgres:latest
     environment:
       - POSTGRES_DB=phishy_db
-      - POSTGRES_USER=phishy_user
-      - POSTGRES_PASSWORD=phishy_password
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=root
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -44,6 +32,8 @@ services:
     image: redis:latest
     volumes:
       - redis_data:/data
+    ports:
+      - "6379:6379"
     networks:
       - phishy-network
 
