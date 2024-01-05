@@ -17,4 +17,4 @@ jobs:
       with:
         node-version: '20.x'
     - name: Build the Core Service Docker image
-      run: docker build . --file core/Dockerfile --tag core-api:$(date +%s)
+      run: docker build ./core --file ./core/Dockerfile --tag core-api:$(date +%s)
