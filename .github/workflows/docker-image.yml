@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the Core Service Docker image
+      run: docker build core --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the Core Service Docker image
+      run: docker build worker --file Dockerfile --tag my-image-name:$(date +%s)
