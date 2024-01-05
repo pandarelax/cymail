@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Core Service Docker image
-      run: docker build core --file Dockerfile --tag core-api:$(date +%s)
+      run: docker build . --file core/Dockerfile --tag core-api:$(date +%s)
