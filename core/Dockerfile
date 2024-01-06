@@ -1,19 +1,17 @@
-FROM node:20.8.0-alpine
+FROM node:20-alpine3.18
 
-# Create app directory
-WORKDIR /usr/src/app
+# RUN addgroup app && adduser -S -G app app
 
-# Install app dependencies
+# USER app
+
+WORKDIR /app
+
 COPY package*.json ./
 
 RUN npm install
 
-# Bundle app source
 COPY . .
 
-# Build app
-RUN npm run build
+EXPOSE 5173
 
-EXPOSE 3000
-
-CMD [ "node", "dist/app.js" ]
+CMD npm run dev

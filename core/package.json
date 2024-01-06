@@ -1,7 +1,7 @@
 {
   "name": "core",
   "version": "1.0.0",
-  "description": "core application to handle routes for phishy task case",
+  "description": "core application to handle routes for cymail",
   "main": "src/app.ts",
   "type": "module",
   "scripts": {
