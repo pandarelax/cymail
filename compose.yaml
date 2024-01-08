@@ -108,7 +108,7 @@ services:
       - 6379:6379
 
     # specify the volumes to mount for the redis service
-    # we're mounting the volume named "anime" inside the container at /data/db directory
+    # we're mounting the volume named "cymail" inside the container at /data/db directory
     # this is done so that the data inside the redis container is persisted even if the container is stopped
     volumes:
       - cymail:/data/db
